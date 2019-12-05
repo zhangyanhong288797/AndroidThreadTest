@@ -1,0 +1,12 @@
+此次实践是通过handler处理机制来完成对消息的处理
+我对handler有了更进一步的掌握和认识。
+Handler的作用：
+（1）在非UI线程中完成耗时操作，在UI线程中去更新UI。
+（2）可以在主线程中发送延时消息。
+Message：消息体，用于装载需要发送的对象。 
+Handler：它直接继承自Object。作用是：在子线程中发送Message或者Runnable对象到MessageQueue中；在UI线程中接收、处理从MessageQueue分发出来的Message或者Runnable对象。发送消息一般使用Handler的sendMessage()方法，而发出去的消息经过处理后最终会传递到Handler的handlerMessage()方法中。 
+MessageQueue：用于存放Message或Runnable对象的消息队列。它由对应的Looper对象创建，并由Looper对象管理。每个线程中都只会有一个MessageQueue对象。 
+Looper：是每个线程中的MessageQueue的管家，负责接收和分发Message或Runnable的工作。调用Looper.loop()方法，就是一个死循环，不断地从MessageQueue中取消息：如果有消息，就取出，并调用Handler的handlerMessage()方法；
+总结： 
+（1）Handler负责发送消息，Looper负责接收Handler发送的消息放到MessageQueue，Looper又将消息回传给Handler自己。
+（2）一个Handler对应一个Looper对象，一个Looper对应一个MessageQueue对象（Looper内部包含一个MessageQueue），一个Handler可以生成多个Message。
